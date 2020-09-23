@@ -83,9 +83,11 @@ class SentinelClient(DefaultClient):
 
         sentinel_timeout = self._options.get('SENTINEL_TIMEOUT', 1)
         password = self._options.get('PASSWORD', None)
+        sentinel_kwargs = self._options.get('SENTINEL_KWARGS', None)
         sentinel = SentinelClass(sentinel_hosts,
                                  socket_timeout=sentinel_timeout,
-                                 password=password)
+                                 password=password,
+                                 sentinel_kwargs=sentinel_kwargs)
 
         if write:
             host, port = sentinel.discover_master(master_name)
