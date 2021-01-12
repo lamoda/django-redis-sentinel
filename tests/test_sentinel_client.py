@@ -365,3 +365,10 @@ class TestDjangoSentinelCacheWithPrefixedCache(TestDjangoSentinelCache):
     def cache(self):
         yield caches["with_prefix"]
         caches["with_prefix"].clear()
+
+
+class TestDjangoSentinelCacheWithBlockingConnectionPool(TestDjangoSentinelCache):
+    @pytest.fixture()
+    def cache(self):
+        yield caches["with_blocking_connection_pool"]
+        caches["with_blocking_connection_pool"].clear()
