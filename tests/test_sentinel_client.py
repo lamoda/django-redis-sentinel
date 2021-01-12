@@ -358,3 +358,10 @@ class TestDjangoSentinelCache():
         # Test generator object
         result = cache.iter_keys("foo*")
         assert next(result) is not None
+
+
+class TestDjangoSentinelCacheWithPrefixedCache(TestDjangoSentinelCache):
+    @pytest.fixture()
+    def cache(self):
+        yield caches["with_prefix"]
+        caches["with_prefix"].clear()
