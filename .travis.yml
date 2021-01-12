@@ -11,10 +11,6 @@ env:
   - DJANGO="django==2.2.9"
   - DJANGO="django==2.1.15"
   - DJANGO="django==2.0.13"
-  - DJANGO="django==1.11.27"
-  - DJANGO="django==1.10.8"
-  - DJANGO="django==1.9.13"
-  - DJANGO="django==1.8.19"
 
 matrix:
   exclude:
