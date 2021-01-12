@@ -29,4 +29,13 @@ CACHES = {
         },
         "KEY_PREFIX": "test-prefix",
     },
+    "with_blocking_connection_pool": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "django-sentinel/127.0.0.1:26379/0,django-sentinel/127.0.0.1:26380/0,django-sentinel/127.0.0.1:26381/0",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_sentinel.SentinelClient",
+        },
+        "CONNECTION_POOL_CLASS": "redis.connection.BlockingConnectionPool",
+
+    }
 }
