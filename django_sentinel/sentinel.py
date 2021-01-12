@@ -103,28 +103,17 @@ class SentinelClient(DefaultClient):
         self.log.debug("Connecting to: %s", connection_url)
         return self.connection_factory.connect(connection_url)
 
-    @staticmethod
-    def _get_connections(client):
-        if hasattr(client.connection_pool, "_available_connections"):
-            return client.connection_pool._available_connections
-        else:
-            return client.connection_pool._connections
-
     def close(self, **kwargs):
         """
         Closing old connections, as master may change in time of inactivity.
         """
         self.log.debug("close called")
         if self._client_read:
-            connections = self._get_connections(self._client_read)
-            for c in connections:
-                c.disconnect()
+            self._client_read.connection_pool.disconnect()
             self.log.debug("client_read closed")
 
         if self._client_write:
-            connections = self._get_connections(self._client_write)
-            for c in connections:
-                c.disconnect()
+            self._client_write.connection_pool.disconnect()
             self.log.debug("client_write closed")
 
         del(self._client_write)
